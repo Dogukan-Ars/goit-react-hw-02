@@ -1,12 +1,21 @@
-const Options = () => {
-    const options = ['Good', 'Neutral', 'Bad']
+const Options = ({ onLeaveFeedback, onReset, total }) => {
     return (
         <>
-            {options.map(option => (
-                <button key={option} type="button">
-                    {option}
+            <button type="button" onClick={() => onLeaveFeedback("good")}>
+                Good
+            </button>
+            <button type="button" onClick={() => onLeaveFeedback("neutral")}>
+                Neutral
+            </button>
+            <button type="button" onClick={() => onLeaveFeedback("bad")}>
+                Bad
+            </button>
+
+            {total > 0 &&
+                <button onClick={onReset}>
+                    Reset
                 </button>
-            ))}
+            }
         </>
     )
 }
