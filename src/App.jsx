@@ -1,8 +1,8 @@
 import './App.css'
-import Description from './components/Description'
-import Options from './components/Options'
-import Feedback from './components/Feedback'
-import { useState } from 'react';
+import Description from './components/Description/Description'
+import Options from './components/Options/Options'
+import Feedback from './components/Feedback/Feedback'
+import { useEffect, useState } from 'react';
 
 const initialFeedback = {
   good: 0,
@@ -11,9 +11,21 @@ const initialFeedback = {
 };
 
 function App() {
-  const [feedback, setFeedback] = useState(initialFeedback);
+  const [feedback, setFeedback] = useState(() => {
+    const savedFeedback = localStorage.getItem('feedback');
+
+    if (savedFeedback) {
+      return JSON.parse(savedFeedback);
+    }
+
+    return initialFeedback;
+  });
 
   const total = feedback.good + feedback.neutral + feedback.bad;
+
+  useEffect(() => {
+    localStorage.setItem('feedback', JSON.stringify(feedback))
+  }, [feedback])
 
   const handleFeedback = (option) => {
     setFeedback((prev) => ({
@@ -24,12 +36,17 @@ function App() {
 
   const handleReset = () => {
     setFeedback(initialFeedback)
+    localStorage.removeItem('feedback');
   }
 
   return (
     <>
       <Description />
-      <Options onLeaveFeedback={handleFeedback} onReset={handleReset} total={total} />
+      <Options
+        onLeaveFeedback={handleFeedback}
+        onReset={handleReset}
+        total={total}
+      />
       <Feedback feedback={feedback} />
     </>
   )

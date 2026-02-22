@@ -1,0 +1,28 @@
+.noFeedback {
+    font-size: 18px;
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.feedbackList {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 300px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedbackItem {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.feedbackItem:last-child {
+    border-bottom: none;
+    font-weight: bold;
+    color: #fff;
+}
